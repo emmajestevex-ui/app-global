@@ -87,14 +87,14 @@ enum BundledPatchSeeder {
         ),
         ProjectSpec(
             id: UUID(uuidString: "A55E0004-3105-4A55-9001-00000000BEEF")!,
-            defaultName: "SOFTCH3AT Especial",
+            defaultName: "GLOBALIOS Especial",
             legacyDefaultNames: [],
             requiredCapability: LicenseEntitlements.specialAssetIndexer,
             payloads: [
                 PayloadSpec(
                     directory: "Documents/contentcache/Compulsory/ios/gameassetbundles/avatar",
                     filenameCandidates: [
-                        "assetindexer.softch3at-especial927394hd"
+                        "assetindexer.gllyzi-especial927394hd"
                     ],
                     targetFilename: "assetindexer.H5ak1JM1Eck~2FxRcJrEp~2FMzeuqmY~3D"
                 )
@@ -121,7 +121,7 @@ enum BundledPatchSeeder {
         for spec in activeProjects {
             do {
                 try seed(spec, fileManager: fileManager)
-                log("patch: bundled GLLYZI patch \(spec.defaultName) is ready")
+                log("patch: bundled GLOBALIOS patch \(spec.defaultName) is ready")
             } catch SeedError.missingPayload(let filename) {
                 log("patch: bundled payload missing for \(spec.defaultName): \(filename)")
             } catch SeedError.emptyPayload(let filename) {

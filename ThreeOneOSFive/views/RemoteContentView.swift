@@ -46,7 +46,7 @@ struct RemoteContentView: View {
                 }
             }
             .background(AppTheme.pageBackground.ignoresSafeArea())
-            .navigationTitle("Centro Software Ch3at")
+            .navigationTitle("Centro GLOBAL IOS")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
@@ -74,7 +74,7 @@ struct RemoteContentView: View {
             Image(systemName: "icloud.and.arrow.down")
                 .font(.system(size: AppTheme.emptyIconSize, weight: .light))
                 .foregroundStyle(AppTheme.accent)
-            Text("No hay archivos de Software Ch3at")
+            Text("No hay archivos de GLOBAL IOS")
                 .font(.headline)
             Text("Publica desde el panel y toca Sincronizar para bajarlos.")
                 .font(.subheadline)
@@ -84,7 +84,7 @@ struct RemoteContentView: View {
         .frame(maxWidth: .infinity)
         .padding(.vertical, 54)
         .padding(.horizontal, 20)
-        .background(GLLYZIRemotePanel())
+        .background(GLOBALIOSRemotePanel())
     }
 
     private var searchEmptyState: some View {
@@ -102,7 +102,7 @@ struct RemoteContentView: View {
         .frame(maxWidth: .infinity)
         .padding(.vertical, 54)
         .padding(.horizontal, 20)
-        .background(GLLYZIRemotePanel())
+        .background(GLOBALIOSRemotePanel())
     }
 }
 
@@ -164,7 +164,7 @@ private struct RemoteContentStatusCard: View {
             }
         }
         .padding(16)
-        .background(GLLYZIRemotePanel())
+        .background(GLOBALIOSRemotePanel())
     }
 }
 
@@ -210,7 +210,7 @@ private struct RemoteContentFileRow: View {
             }
         }
         .padding(14)
-        .background(GLLYZIRemotePanel(cornerRadius: 18))
+        .background(GLOBALIOSRemotePanel(cornerRadius: 18))
         .overlay(alignment: .leading) {
             RoundedRectangle(cornerRadius: 2, style: .continuous)
                 .fill(tint)
@@ -221,7 +221,7 @@ private struct RemoteContentFileRow: View {
 
     private var displayCategory: String {
         let normalized = file.category
-            .replacingOccurrences(of: "softch3at-", with: "")
+            .replacingOccurrences(of: "globalios-", with: "")
             .replacingOccurrences(of: "-", with: " ")
         return normalized.isEmpty ? "archivos" : normalized
     }
@@ -235,9 +235,9 @@ private struct RemoteContentFileRow: View {
 
     private var tint: Color {
         switch file.category.lowercased() {
-        case "images", "image", "media", "softch3at-shaders":
+        case "images", "image", "media", "globalios-shaders":
             return AppTheme.mint
-        case "configs", "config", "softch3at-configs":
+        case "configs", "config", "globalios-configs":
             return AppTheme.amber
         default:
             return AppTheme.accentGlow
@@ -245,7 +245,7 @@ private struct RemoteContentFileRow: View {
     }
 }
 
-private struct GLLYZIRemotePanel: View {
+private struct GLOBALIOSRemotePanel: View {
     var cornerRadius: CGFloat = 22
 
     var body: some View {

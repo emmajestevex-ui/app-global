@@ -136,7 +136,7 @@ private struct PatchListHeader: View {
         HStack(spacing: 14) {
             AppLogo(size: 46)
             VStack(alignment: .leading, spacing: 4) {
-                Text("SOFTCH3AT client")
+                Text("GLOBALIOS client")
                     .font(.headline)
                 Text("Asset Indexer, Shaders, and 144 fps")
                     .font(.caption)
