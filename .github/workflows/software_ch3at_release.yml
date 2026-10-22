@@ -1,0 +1,134 @@
+name: 'Software Ch3at - SQL, Panel y IPA'
+
+on:
+  workflow_dispatch:
+    inputs:
+      publish_admin:
+        description: 'Publicar el unico panel admin en GitHub Pages (requiere Pages configurado)'
+        required: true
+        type: boolean
+        default: false
+  push:
+    branches: [main]
+    paths:
+      - 'branding/**'
+      - 'tools/software_ch3at_rebrand.py'
+      - '.github/workflows/software_ch3at_release.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  prepare:
+    name: 'Preparar marca / SQL / panel'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - name: 'Aplicar cambios solo al repositorio nuevo'
+        run: |
+          python3 tools/software_ch3at_rebrand.py
+          python3 tools/software_ch3at_rebrand.py --verify
+          git diff --check
+      - name: 'Preparar copia del proyecto para compilar'
+        run: |
+          tar --exclude='./.git' --exclude='./.build' -czf /tmp/software-ch3at-source.tgz .
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Software-Ch3at-SQL-Completo
+          path: supabase/setup_softch3at.sql
+          if-no-files-found: error
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Software-Ch3at-Admin-Panel
+          path: |
+            admin/index.html
+            admin/app.js
+            admin/styles.css
+            admin/gllyzi-logo.png
+          if-no-files-found: error
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Software-Ch3at-Codigo-Actualizado
+          path: /tmp/software-ch3at-source.tgz
+          if-no-files-found: error
+      - name: 'Guardar los cambios en app-software (si hay permisos)'
+        continue-on-error: true
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          if ! git diff --cached --quiet; then
+            git commit -m 'Rebrand independiente Software Ch3at + SQL Supabase'
+            git push origin HEAD:main
+          fi
+
+  build_ipa:
+    name: 'Generar IPA sin firmar'
+    runs-on: macos-15
+    needs: prepare
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: Software-Ch3at-Codigo-Actualizado
+          path: /tmp/softw-source
+      - name: 'Restaurar fuente versionada'
+        run: |
+          mkdir -p "$GITHUB_WORKSPACE/project"
+          tar -xzf /tmp/softw-source/software-ch3at-source.tgz -C "$GITHUB_WORKSPACE/project"
+      - name: 'Compilar aplicacion iOS'
+        working-directory: project
+        run: |
+          set -o pipefail
+          xcodebuild -list -project ThreeOneOSFive.xcodeproj
+          xcodebuild -project ThreeOneOSFive.xcodeproj \
+            -scheme 3105 \
+            -configuration Release \
+            -sdk iphoneos \
+            -derivedDataPath .build \
+            CODE_SIGNING_ALLOWED=NO \
+            build | tee /tmp/software-ch3at-build.log
+      - name: 'Empaquetar IPA'
+        working-directory: project
+        run: |
+          APP=$(find .build/Build/Products/Release-iphoneos -maxdepth 1 -name '*.app' -type d | head -n 1)
+          test -n "$APP" || (echo 'No se encontro el bundle .app' && exit 1)
+          mkdir -p Payload
+          ditto "$APP" "Payload/$(basename "$APP")"
+          zip -qr ../Software_Ch3at_unsigned.ipa Payload
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Software-Ch3at-IPA-SIN-FIRMA
+          path: Software_Ch3at_unsigned.ipa
+          if-no-files-found: error
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: Software-Ch3at-Log-Compilacion
+          path: /tmp/software-ch3at-build.log
+          if-no-files-found: ignore
+
+  publish_admin:
+    name: 'Publicar panel unico (opcional)'
+    if: github.event_name == 'workflow_dispatch' && inputs.publish_admin == true
+    needs: prepare
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: Software-Ch3at-Admin-Panel
+          path: public
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: public
+      - id: deploy
+        uses: actions/deploy-pages@v4
