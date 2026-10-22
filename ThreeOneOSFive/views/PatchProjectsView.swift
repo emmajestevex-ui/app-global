@@ -415,25 +415,6 @@ private struct PatchProjectDetailView: View {
                 VStack(spacing: 18) {
                     PatchDetailHero(project: project, style: detailStyle, isApplied: receipt != nil)
 
-                        HStack(spacing: 12) {
-                            AppRowIcon(systemName: "play.rectangle.fill", tint: AppTheme.accentGlow, symbolSize: 18, frameSize: 42)
-                            VStack(alignment: .leading, spacing: 2) {
-                                Text("TikTok oficial")
-                                    .font(.headline)
-                                    .foregroundStyle(.primary)
-                                Text("@soyenyercitord")
-                                    .font(.caption.weight(.medium))
-                                    .foregroundStyle(.secondary)
-                            }
-                            Spacer()
-                            Image(systemName: "arrow.up.right")
-                                .font(.subheadline.weight(.bold))
-                                .foregroundStyle(AppTheme.accentGlow)
-                        }
-                        .padding(16)
-                        .background(GLOBALIOSFilePanel(cornerRadius: 18))
-                    }
-
                     VStack(spacing: 12) {
                         Button(action: apply) {
                             PatchActionButtonContent(
