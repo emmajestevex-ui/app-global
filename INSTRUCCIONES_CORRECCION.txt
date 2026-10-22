@@ -1,0 +1,17 @@
+GLOBAL IOS - Corrección del error de compilación exit code 65
+
+Error detectado en GitHub Actions: PatchProjectsView.swift:464:9 expected declaration.
+Causa: el migrador anterior quitaba solo la apertura del Link de TikTok, pero no su contenido y llave de cierre.
+
+INSTALACIÓN:
+1. Descomprime este ZIP.
+2. Abre GitHub Desktop y selecciona app-global (NO app-software).
+3. Pulsa Repository > Show in Explorer.
+4. Copia la carpeta tools de este paquete dentro de app-global y acepta reemplazar tools/global_ios_migrate.py.
+5. No borres las demás carpetas del proyecto.
+6. En GitHub Desktop: Summary: Reparar compilación GLOBAL IOS; Commit to main; Push origin.
+7. En GitHub Actions se ejecutará GLOBAL IOS - Migrar, SQL, Panel e IPA por el cambio en tools/global_ios_migrate.py.
+8. Espera el resultado de Compilar IPA sin firmar. No ejecutes Software Ch3at o Glizzy Actions en app-global.
+
+No debes subir este ZIP cerrado a GitHub. Debes copiar el contenido descomprimido al repositorio.
+La validación realizada fue estática; solamente GitHub Actions puede confirmar la compilación total para iPhone.

@@ -106,10 +106,50 @@ def strip_social_sections(text: str) -> str:
     return text
 
 
+def remove_social_link_cards(text: str) -> str:
+    """Remove a complete nested SwiftUI Link card, never only its opening line.
+
+    The prior migration removed just the URL-bearing Link opening, leaving its
+    HStack and closing brace behind and breaking PatchProjectsView.swift.
+    Do not touch Apply / Restore buttons or content synchronization.
+    """
+    social_hosts = (
+        'tiktok.com/', 'discord.gg/', 'chat.whatsapp.com/',
+        'youtube.com/', 'youtu.be/',
+    )
+    while True:
+        match = re.search(r'(?m)^[ \t]*Link\s*\(destination:\s*URL\(string:\s*"https?://[^"\n]+"\)!\)\s*\{', text)
+        if match is None:
+            return text
+        snippet = match.group(0).lower()
+        if not any(host in snippet for host in social_hosts):
+            # Leave unrelated functional links untouched; scan further.
+            rest_start = match.end()
+            later = remove_social_link_cards(text[rest_start:])
+            return text[:rest_start] + later
+        start = match.start()
+        brace = text.rfind('{', match.start(), match.end())
+        depth = 0
+        end = None
+        for i in range(brace, len(text)):
+            if text[i] == '{':
+                depth += 1
+            elif text[i] == '}':
+                depth -= 1
+                if depth == 0:
+                    end = i + 1
+                    break
+        if end is None:
+            raise ValueError('Link social sin llave final')
+        text = text[:start] + text[end:].lstrip('\r\n')
+
+
 def ios() -> None:
     for p in list(ROOT.glob('*.swift')) + list(ROOT.glob('ThreeOneOSFive/**/*.swift')):
         original = p.read_text(encoding='utf-8-sig')
-        s = rebrand(original)
+        # Remove a whole social card BEFORE replacing its URL. A line-only
+        # removal leaves an unmatched closing brace and breaks Xcode builds.
+        s = rebrand(remove_social_link_cards(original))
         # Physical paths/payload names in the patch engine must stay valid.
         # An old payload filename is a technical part of the source and not brand UI.
         s = s.replace('assetindexer.globalios-especial927394hd', 'assetindexer.gllyzi-especial927394hd')
@@ -239,6 +279,9 @@ def verify() -> None:
     if 'tiktok.com' in read('ContentView.swift') or 'discord.gg' in read('ContentView.swift'):
         raise AssertionError('Se encontraron links sociales')
     if 'Redes oficiales' in read('ContentView.swift'):raise AssertionError('Se encontró menú de redes')
+    detail=read('ThreeOneOSFive/views/PatchProjectsView.swift')
+    if 'TikTok oficial' in detail or '@soyenyercitord' in detail:
+        raise AssertionError('Quedó una tarjeta social que rompería la compilación')
     for p in ['App.swift','admin/app.js','supabase/SETUP_GLOBAL_IOS_COMPLETO.sql']:
         s=read(p)
         if any(old in s for old in OLD_REFS+OLD_KEYS):raise AssertionError('Conexión vieja en '+p)
