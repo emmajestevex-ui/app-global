@@ -35,7 +35,7 @@ struct PatchProjectsView: View {
             VStack(spacing: 0) {
                 AppSearchField(
                     text: $searchText,
-                    prompt: "Buscar archivos Software Ch3at",
+                    prompt: "Buscar archivos GLOBAL IOS",
                     clearLabel: language.text("common.clear")
                 )
                 ScrollView {
@@ -47,14 +47,14 @@ struct PatchProjectsView: View {
                         } else if filteredItems.isEmpty && !store.isBusy {
                             searchEmptyState
                         } else {
-                            GLLYZIFilesSectionTitle("Archivos integrados")
+                            GLOBALIOSFilesSectionTitle("Archivos integrados")
                             ForEach(filteredItems) { item in
                                 itemRow(item)
                             }
                         }
 
                         if !remotePatchFiles.isEmpty {
-                            GLLYZIFilesSectionTitle("Actualizaciones remotas")
+                            GLOBALIOSFilesSectionTitle("Actualizaciones remotas")
                             ForEach(remotePatchFiles) { file in
                                 RemotePatchRow(file: file)
                             }
@@ -66,7 +66,7 @@ struct PatchProjectsView: View {
                 }
             }
             .background(AppTheme.pageBackground.ignoresSafeArea())
-            .navigationTitle("Archivos Software Ch3at")
+            .navigationTitle("Archivos GLOBAL IOS")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 if store.isBusy {
@@ -124,7 +124,7 @@ struct PatchProjectsView: View {
         .frame(maxWidth: .infinity)
         .padding(.vertical, 54)
         .padding(.horizontal, 20)
-        .background(GLLYZIFilePanel())
+        .background(GLOBALIOSFilePanel())
     }
 
     private var searchEmptyState: some View {
@@ -142,11 +142,11 @@ struct PatchProjectsView: View {
         .frame(maxWidth: .infinity)
         .padding(.vertical, 54)
         .padding(.horizontal, 20)
-        .background(GLLYZIFilePanel())
+        .background(GLOBALIOSFilePanel())
     }
 }
 
-private struct GLLYZIFilesSectionTitle: View {
+private struct GLOBALIOSFilesSectionTitle: View {
     let title: String
 
     init(_ title: String) {
@@ -169,7 +169,7 @@ private struct PatchListHeader: View {
         HStack(spacing: 14) {
             AppLogo(size: 46)
             VStack(alignment: .leading, spacing: 4) {
-                Text("Centro Software Ch3at")
+                Text("Centro GLOBAL IOS")
                     .font(.title3.weight(.black))
                 Text("Aimbots y archivos privados")
                     .font(.caption)
@@ -188,7 +188,7 @@ private struct PatchListHeader: View {
             }
         }
         .padding(16)
-        .background(GLLYZIFilePanel())
+        .background(GLOBALIOSFilePanel())
         .overlay(alignment: .bottomLeading) {
             Capsule()
                 .fill(
@@ -254,7 +254,7 @@ private struct PatchProjectRow: View {
                 .foregroundStyle(.tertiary)
         }
         .padding(14)
-        .background(GLLYZIFilePanel(cornerRadius: 18))
+        .background(GLOBALIOSFilePanel(cornerRadius: 18))
         .overlay(alignment: .leading) {
             RoundedRectangle(cornerRadius: 2, style: .continuous)
                 .fill(style.tint)
@@ -302,11 +302,11 @@ private struct RemotePatchRow: View {
             }
         }
         .padding(14)
-        .background(GLLYZIFilePanel(cornerRadius: 18))
+        .background(GLOBALIOSFilePanel(cornerRadius: 18))
     }
 }
 
-private struct GLLYZIFilePanel: View {
+private struct GLOBALIOSFilePanel: View {
     var cornerRadius: CGFloat = 22
 
     var body: some View {
@@ -415,7 +415,6 @@ private struct PatchProjectDetailView: View {
                 VStack(spacing: 18) {
                     PatchDetailHero(project: project, style: detailStyle, isApplied: receipt != nil)
 
-                    Link(destination: URL(string: "https://www.tiktok.com/@soyenyercitord?_r=1&_t=ZS-9AkGglyDhcy")!) {
                         HStack(spacing: 12) {
                             AppRowIcon(systemName: "play.rectangle.fill", tint: AppTheme.accentGlow, symbolSize: 18, frameSize: 42)
                             VStack(alignment: .leading, spacing: 2) {
@@ -432,7 +431,7 @@ private struct PatchProjectDetailView: View {
                                 .foregroundStyle(AppTheme.accentGlow)
                         }
                         .padding(16)
-                        .background(GLLYZIFilePanel(cornerRadius: 18))
+                        .background(GLOBALIOSFilePanel(cornerRadius: 18))
                     }
 
                     VStack(spacing: 12) {
@@ -630,7 +629,7 @@ private struct PatchDetailHero: View {
             .background(Color.white.opacity(0.045), in: RoundedRectangle(cornerRadius: 16, style: .continuous))
         }
         .padding(18)
-        .background(GLLYZIFilePanel())
+        .background(GLOBALIOSFilePanel())
     }
 }
 

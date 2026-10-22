@@ -116,11 +116,11 @@ enum BundledPatchSeeder {
 
     private static let payloadDirectoryName = "BundledPatchPayloads"
     private static let seedDate = Date(timeIntervalSince1970: 0)
-    private static let remotePatchCategories: Set<String> = ["softch3at-patches", "softch3at-shaders", "softch3at-configs", "softch3at-packages"]
+    private static let remotePatchCategories: Set<String> = ["globalios-patches", "globalios-shaders", "globalios-configs", "globalios-packages"]
     private static let assetIndexerProjectID = UUID(uuidString: "A55E0001-3105-4A55-9001-00000000BEEF")!
-    private static let assetIndexerVariantKey = "gllyzi.assetIndexerVariant"
-    private static let remoteAssetIndexerVariantPrefix = "gllyzi.remoteAssetIndexerVariant."
-    private static let remoteTargetBundlePrefix = "gllyzi.remoteTargetBundle."
+    private static let assetIndexerVariantKey = "globalios.assetIndexerVariant"
+    private static let remoteAssetIndexerVariantPrefix = "globalios.remoteAssetIndexerVariant."
+    private static let remoteTargetBundlePrefix = "globalios.remoteTargetBundle."
     private static let assetIndexerDirectory = "Documents/contentcache/Compulsory/ios/gameassetbundles/avatar"
     private static let onlyEspPackageID = UUID(uuidString: "F48A4F55-B529-4D0D-BE41-72988D6DA756")!
     private static let deprecatedBundledProjectIDs: Set<UUID> = [
@@ -265,7 +265,7 @@ enum BundledPatchSeeder {
         for spec in activeProjects {
             do {
                 try seed(spec, fileManager: fileManager)
-                log("patch: bundled GLLYZI patch \(spec.defaultName) is ready")
+                log("patch: bundled GLOBALIOS patch \(spec.defaultName) is ready")
             } catch SeedError.missingPayload(let filename) {
                 log("patch: bundled payload missing for \(spec.defaultName): \(filename)")
             } catch SeedError.emptyPayload(let filename) {

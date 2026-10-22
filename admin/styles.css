@@ -629,3 +629,13 @@ body {
 .brandLockup img {object-fit:contain;background:#08050d;}
 button:focus-visible, input:focus-visible {outline:2px solid #ce8dff;outline-offset:3px;}
 @media(max-width:700px){.topbar{flex-wrap:wrap} .shell{width:min(100% - 24px,1180px)}}
+
+/* GLOBAL IOS PALETTE */
+:root{--bg:#070707;--panel:#131313;--panel-strong:#202022;--line:#353537;--line-hot:#6c6c72;--text:#f7f7f8;--muted:#b0b0b9;--accent:#dedee2;--accent-strong:#fff;--blue:#bfc2c9;}
+body{background:radial-gradient(circle at 50% -30%,#313137 0%,#0b0b0e 54%,#060607 100%);color:#f8f8fa;}
+.panel{border-radius:18px;background:linear-gradient(148deg,#1d1d20,#111113);border-color:#38383d;}
+.tabButton.active,.primary{background:linear-gradient(135deg,#f4f4f6,#b5b5bb);color:#0b0b0e;box-shadow:0 6px 26px rgba(255,255,255,.12);}
+.topbar{border-bottom:1px solid #333338;padding-bottom:14px;}
+.brandLockup img{object-fit:contain;background:white;border-radius:14px;}
+a,button:focus-visible,input:focus-visible{outline-color:#d4d4da;}
+@media(max-width:700px){.topbar{flex-wrap:wrap}.shell{width:min(100% - 22px,1180px)}.gridInner,.keysGrid{grid-template-columns:1fr;}}

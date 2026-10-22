@@ -1,11 +1,11 @@
 import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
 
-const SUPABASE_URL = "https://jtifsqolnkxrououonjs.supabase.co";
-const SUPABASE_KEY = "sb_publishable_vVlLdGyUErtzRfSyPU426g_WqVACybG";
-const BUCKET = "softch3at-content";
+const SUPABASE_URL = "https://tqdbvswgpmtbfezwucli.supabase.co";
+const SUPABASE_KEY = "sb_publishable_dR7EYTs81scCKwgWNkwFug_2Y4scFhh";
+const BUCKET = "globalios-content";
 const SCRIPT_VERSION = "20260923-target-help";
-const CLIENT_PREFIX = "softch3at-";
-const LICENSE_PREFIX = "SOFTCH3AT-";
+const CLIENT_PREFIX = "globalios-";
+const LICENSE_PREFIX = "GLOBALIOS-";
 const DEFAULT_TARGET_BUNDLE = "com.dts.freefireth";
 const FREE_FIRE_MAX_BUNDLE = "com.dts.freefiremax";
 const ASSET_INDEXER_DIRECTORY = "Documents/contentcache/Compulsory/ios/gameassetbundles/avatar";
@@ -27,14 +27,14 @@ const PATCH_PRESETS = [
     key: "asset-indexer",
     name: "Aimbot Drag FF Normal",
     slug: "asset-indexer-ff-max",
-    category: "softch3at-patches",
+    category: "globalios-patches",
     description: "Archivo de aimbot",
     targetBundle: FREE_FIRE_MAX_BUNDLE,
     rules: [
       {
         label: ASSET_VARIANTS.pen.label,
         slug: "asset-indexer-ff-max",
-        category: "softch3at-patches",
+        category: "globalios-patches",
         description: "Avatar asset bundle for Free Fire Max",
         targetBundle: ASSET_VARIANTS.pen.targetBundle,
         targetPath: ASSET_VARIANTS.pen.targetPath,
@@ -43,7 +43,7 @@ const PATCH_PRESETS = [
       {
         label: ASSET_VARIANTS.h5.label,
         slug: "asset-indexer",
-        category: "softch3at-patches",
+        category: "globalios-patches",
         description: "Avatar asset bundle for Free Fire normal",
         targetBundle: ASSET_VARIANTS.h5.targetBundle,
         targetPath: ASSET_VARIANTS.h5.targetPath,
@@ -55,14 +55,14 @@ const PATCH_PRESETS = [
     key: "shaders",
     name: "Holo RGB",
     slug: "shaders",
-    category: "softch3at-shaders",
+    category: "globalios-shaders",
     description: "Archivo visual",
     targetBundle: DEFAULT_TARGET_BUNDLE,
     rules: [
       {
         label: "Holo RGB - FF Normal",
         slug: "shaders",
-        category: "softch3at-shaders",
+        category: "globalios-shaders",
         description: "Archivo visual para Free Fire normal",
         targetBundle: DEFAULT_TARGET_BUNDLE,
         targetPath: "Documents/contentcache/Optional/ios/gameassetbundles/shaders.HPt9DZviTSXL9hpGW9QNOMigNLA~3D",
@@ -70,7 +70,7 @@ const PATCH_PRESETS = [
       {
         label: "Holo RGB - FF Max",
         slug: "shaders-ff-max",
-        category: "softch3at-shaders",
+        category: "globalios-shaders",
         description: "Archivo visual para Free Fire Max",
         targetBundle: FREE_FIRE_MAX_BUNDLE,
         targetPath: "Documents/contentcache/Optional/ios/gameassetbundles/shaders.HPt9DZviTSXL9hpGW9QNOMigNLA~3D",
@@ -81,7 +81,7 @@ const PATCH_PRESETS = [
     key: "holo-pj-normal",
     name: "Holo FF Normal PJ",
     slug: "holo-ff-normal-pj",
-    category: "softch3at-shaders",
+    category: "globalios-shaders",
     description: "Holo de personajes para Free Fire normal",
     targetBundle: DEFAULT_TARGET_BUNDLE,
     targetPath: "Documents/contentcache/Optional/ios/optionalavatarres/gameassetbundles/optionalavatarres_commonab_shader.BNrjwQsbTrqz6jACY9i6FB6DyYI~3D",
@@ -90,7 +90,7 @@ const PATCH_PRESETS = [
     key: "aimbot-cuello-normal",
     name: "Aimbot Cuello FF Normal",
     slug: "aimbot-cuello-ff-normal",
-    category: "softch3at-patches",
+    category: "globalios-patches",
     description: "Archivo de aimbot cuello para Free Fire normal",
     targetBundle: DEFAULT_TARGET_BUNDLE,
     targetPath: `${ASSET_INDEXER_DIRECTORY}/assetindexer.H5ak1JM1Eck~2FxRcJrEp~2FMzeuqmY~3D`,
@@ -99,7 +99,7 @@ const PATCH_PRESETS = [
     key: "aimbot-pecho-normal",
     name: "Aimbot Pecho FF Normal",
     slug: "aimbot-pecho-ff-normal",
-    category: "softch3at-patches",
+    category: "globalios-patches",
     description: "Archivo de aimbot pecho para Free Fire normal",
     targetBundle: DEFAULT_TARGET_BUNDLE,
     targetPath: `${ASSET_INDEXER_DIRECTORY}/assetindexer.H5ak1JM1Eck~2FxRcJrEp~2FMzeuqmY~3D`,
@@ -108,7 +108,7 @@ const PATCH_PRESETS = [
     key: "balas-magicas-normal",
     name: "Balas Magicas FF Normal",
     slug: "balas-magicas-ff-normal",
-    category: "softch3at-patches",
+    category: "globalios-patches",
     description: "Archivo de balas magicas para Free Fire normal",
     targetBundle: DEFAULT_TARGET_BUNDLE,
     targetPath: ASSET_VARIANTS.h5.targetPath,
@@ -117,7 +117,7 @@ const PATCH_PRESETS = [
     key: "fps-144",
     name: "Optimizador FPS",
     slug: "144-fps",
-    category: "softch3at-configs",
+    category: "globalios-configs",
     description: "Preferencias FPS",
     targetBundle: DEFAULT_TARGET_BUNDLE,
     targetPath: "Library/Preferences/com.dts.freefireth.plist",
@@ -126,14 +126,14 @@ const PATCH_PRESETS = [
     key: "only-esp-ffth",
     name: "Only Esp FFTH",
     slug: "only-esp-ffth",
-    category: "softch3at-patches",
+    category: "globalios-patches",
     description: "Only Esp patch for Free Fire TH",
     targetBundle: DEFAULT_TARGET_BUNDLE,
     rules: [
       {
         label: "Assembly-CSharp-patch.bytes",
         slug: "only-esp-ffth-assembly",
-        category: "softch3at-patches",
+        category: "globalios-patches",
         description: "Assembly patch for Free Fire TH",
         targetBundle: DEFAULT_TARGET_BUNDLE,
         targetPath: "Documents/Assembly-CSharp-patch.bytes",
@@ -141,7 +141,7 @@ const PATCH_PRESETS = [
       {
         label: "GameBand-Fix.json",
         slug: "only-esp-ffth-gameband",
-        category: "softch3at-configs",
+        category: "globalios-configs",
         description: "GameBand fix for Free Fire TH",
         targetBundle: DEFAULT_TARGET_BUNDLE,
         targetPath: "Documents/GameBand-Fix.json",
@@ -149,7 +149,7 @@ const PATCH_PRESETS = [
       {
         label: "localConfig.json",
         slug: "only-esp-ffth-config",
-        category: "softch3at-configs",
+        category: "globalios-configs",
         description: "localConfig for Free Fire TH",
         targetBundle: DEFAULT_TARGET_BUNDLE,
         targetPath: "Documents/localConfig.json",
@@ -160,21 +160,21 @@ const PATCH_PRESETS = [
     key: "aimbot-drag-ff-max",
     name: "Aimbot Drag FF Max",
     slug: "aimbot-drag-ff-max",
-    category: "softch3at-patches",
+    category: "globalios-patches",
     description: "Patch with Assembly-CSharp-patch.bytes and localConfig.json",
     targetBundle: FREE_FIRE_MAX_BUNDLE,
     rules: [
       {
         label: "Assembly-CSharp-patch.bytes",
         slug: "aimbot-drag-ff-max-assembly",
-        category: "softch3at-patches",
+        category: "globalios-patches",
         description: "Assembly patch for Free Fire Max",
         targetPath: "Documents/Assembly-CSharp-patch.bytes",
       },
       {
         label: "localConfig.json",
         slug: "aimbot-drag-ff-max-config",
-        category: "softch3at-configs",
+        category: "globalios-configs",
         description: "localConfig.json for Free Fire Max",
         targetPath: "Documents/localConfig.json",
       },
@@ -190,7 +190,7 @@ const supabaseClient = createClient(SUPABASE_URL, SUPABASE_KEY, {
   },
 });
 
-window.__SOFTCH3AT_ADMIN_READY = SCRIPT_VERSION;
+window.__GLOBALIOS_ADMIN_READY = SCRIPT_VERSION;
 
 const state = {
   files: [],
@@ -260,7 +260,7 @@ init();
 
 async function init() {
   if (SUPABASE_KEY.startsWith("PON_AQUI_")) {
-    setLoginStatus("Falta pegar la publishable key del Supabase nuevo de Software Ch3at en admin/app.js.", true);
+    setLoginStatus("Falta pegar la publishable key del Supabase nuevo de GLOBAL IOS en admin/app.js.", true);
     return;
   }
 
@@ -497,7 +497,7 @@ async function loadFiles() {
     return;
   }
 
-  state.files = (data ?? []).filter(isSOFTCH3ATFile);
+  state.files = (data ?? []).filter(isGLOBALIOSFile);
   setStatus("Listo. Recuerda publicar para que los iPhone reciban los cambios.");
   renderFiles();
 }
@@ -522,7 +522,7 @@ async function saveFile(event) {
     return;
   }
   if (!targetPath) {
-    setStatus("Completa la ruta que va a reemplazar en Software Ch3at.");
+    setStatus("Completa la ruta que va a reemplazar en GLOBAL IOS.");
     return;
   }
   if (!isCompleteTargetPath(targetPath)) {
@@ -554,7 +554,7 @@ async function saveFile(event) {
       p_id: els.editingId.value || null,
       p_name: name,
       p_slug: slug,
-      p_category: softch3atCategory(els.categoryInput.value || "softch3at-patches"),
+      p_category: softch3atCategory(els.categoryInput.value || "globalios-patches"),
       p_target_bundle: targetBundle,
       p_target_path: targetPath,
       p_description: els.descriptionInput.value.trim() || null,
@@ -636,7 +636,7 @@ async function disablePreset(preset) {
     const { error } = await supabaseClient.rpc("admin_disable_remote_content_target", {
       p_name: preset.name,
       p_slug: rule.slug,
-      p_category: softch3atCategory(rule.category || preset.category || "softch3at-patches"),
+      p_category: softch3atCategory(rule.category || preset.category || "globalios-patches"),
       p_target_bundle: ruleTargetBundle(preset, rule),
       p_target_path: safeRelativePath(rule.targetPath),
       p_description: rule.description || preset.description || null,
@@ -678,7 +678,7 @@ function editFile(file) {
   els.nameInput.value = file.name;
   els.slugInput.value = file.slug;
   els.slugInput.dataset.touched = "true";
-  els.categoryInput.value = softch3atCategory(file.category || "softch3at-files");
+  els.categoryInput.value = softch3atCategory(file.category || "globalios-files");
   els.targetBundleInput.value = safeTargetBundle(file.target_bundle);
   els.targetPathInput.value = file.target_path || fallbackTargetPath(file);
   els.targetPathInput.dataset.touched = "true";
@@ -695,7 +695,7 @@ function resetForm() {
   els.editingId.value = "";
   delete els.slugInput.dataset.touched;
   delete els.targetPathInput.dataset.touched;
-  els.categoryInput.value = "softch3at-patches";
+  els.categoryInput.value = "globalios-patches";
   els.targetBundleInput.value = FREE_FIRE_MAX_BUNDLE;
   els.assetVariantInput.value = "pen";
   els.targetPathInput.value = "";
@@ -717,7 +717,7 @@ async function loadKeys() {
     return;
   }
 
-  state.keys = (data ?? []).filter(isSOFTCH3ATKey);
+  state.keys = (data ?? []).filter(isGLOBALIOSKey);
   setKeyStatus("Listo. Puedes crear, copiar, pausar o bloquear keys.");
   renderKeys();
 }
@@ -734,7 +734,7 @@ async function generateKeys(event) {
     return;
   }
   if (customKey && !customKey.startsWith(LICENSE_PREFIX)) {
-    setKeyStatus("La key personalizada debe empezar con SOFTCH3AT- para no mezclarse con otros proyectos.");
+    setKeyStatus("La key personalizada debe empezar con GLOBALIOS- para no mezclarse con otros proyectos.");
     return;
   }
 
@@ -745,7 +745,7 @@ async function generateKeys(event) {
   const total = customKey ? 1 : quantity;
 
   for (let index = 0; index < total; index += 1) {
-    const nextKey = customKey || makeSOFTCH3ATKey();
+    const nextKey = customKey || makeGLOBALIOSKey();
     const { data, error } = await supabaseClient.rpc("admin_generate_licenses", {
       p_quantity: 1,
       p_duration_hours: duration > 0 ? duration : null,
@@ -768,7 +768,7 @@ async function generateKeys(event) {
 
   els.generatedKeysText.textContent = createdKeys.join("\n");
   els.generatedKeysBox.classList.toggle("hidden", createdKeys.length === 0);
-  setKeyStatus(`${createdKeys.length} key(s) SOFTCH3AT creada(s).`);
+  setKeyStatus(`${createdKeys.length} key(s) GLOBALIOS creada(s).`);
   els.customKeyInput.value = "";
   await loadKeys();
 }
@@ -812,7 +812,7 @@ function applyPreset(preset, selectedRule = null) {
   els.nameInput.value = preset.name;
   els.slugInput.value = rule.slug;
   els.slugInput.dataset.touched = "true";
-  els.categoryInput.value = softch3atCategory(rule.category || preset.category || "softch3at-patches");
+  els.categoryInput.value = softch3atCategory(rule.category || preset.category || "globalios-patches");
   els.targetBundleInput.value = ruleTargetBundle(preset, rule);
   els.targetPathInput.value = safeRelativePath(rule.targetPath);
   els.targetPathInput.dataset.touched = "true";
@@ -839,7 +839,7 @@ function suggestTargetPath() {
     els.targetBundleInput.value = safeTargetBundle(variant.targetBundle);
     els.targetPathInput.value = safeRelativePath(variant.targetPath);
   } else {
-    els.targetPathInput.value = safeRelativePath(`${softch3atCategory(els.categoryInput.value || "softch3at-patches")}/${file.name}`);
+    els.targetPathInput.value = safeRelativePath(`${softch3atCategory(els.categoryInput.value || "globalios-patches")}/${file.name}`);
   }
   updateAssetVariantVisibility();
 }
@@ -867,7 +867,7 @@ function applyAssetVariant(value) {
   els.targetBundleInput.value = safeTargetBundle(variant.targetBundle);
   els.targetPathInput.value = safeRelativePath(variant.targetPath);
   els.targetPathInput.dataset.touched = "true";
-  els.categoryInput.value = "softch3at-patches";
+  els.categoryInput.value = "globalios-patches";
   updateAssetVariantVisibility();
 }
 
@@ -925,10 +925,10 @@ function inferredAssetVariantFromInput(file) {
 
 function normalizeCategoryForFile(file) {
   if (!file) return;
-  const category = softch3atCategory(els.categoryInput.value || "softch3at-patches");
+  const category = softch3atCategory(els.categoryInput.value || "globalios-patches");
   const isPackage = String(file.name || "").toLowerCase().endsWith(".3105");
-  if (category === "softch3at-packages" && !isPackage) {
-    els.categoryInput.value = "softch3at-patches";
+  if (category === "globalios-packages" && !isPackage) {
+    els.categoryInput.value = "globalios-patches";
     setStatus("Ese archivo no es .3105, lo puse en aimbots para que salga y funcione como patch.");
   }
 }
@@ -1214,41 +1214,41 @@ function normalizeKey(value) {
   return String(value || "").trim().replace(/\s+/g, "").toUpperCase();
 }
 
-function makeSOFTCH3ATKey() {
+function makeGLOBALIOSKey() {
   const bytes = new Uint8Array(12);
   crypto.getRandomValues(bytes);
   const hex = Array.from(bytes, (byte) => byte.toString(16).padStart(2, "0")).join("").toUpperCase();
   return `${LICENSE_PREFIX}${hex.slice(0, 4)}-${hex.slice(4, 8)}-${hex.slice(8, 12)}-${hex.slice(12, 16)}-${hex.slice(16, 20)}-${hex.slice(20, 24)}`;
 }
 
-function isSOFTCH3ATFile(file) {
+function isGLOBALIOSFile(file) {
   return String(file.category || "").toLowerCase().startsWith(CLIENT_PREFIX)
     || String(file.slug || "").toLowerCase().startsWith(CLIENT_PREFIX);
 }
 
-function isSOFTCH3ATKey(item) {
+function isGLOBALIOSKey(item) {
   return normalizeKey(item.license_key).startsWith(LICENSE_PREFIX)
-    || String(item.label || "").toLowerCase().includes("[softch3at]");
+    || String(item.label || "").toLowerCase().includes("[globalios]");
 }
 
 function softch3atCategory(category) {
-  const clean = String(category || "softch3at-files").trim().toLowerCase();
+  const clean = String(category || "globalios-files").trim().toLowerCase();
   if (clean.startsWith(CLIENT_PREFIX)) return clean;
   const map = {
-    files: "softch3at-files",
-    patches: "softch3at-patches",
-    images: "softch3at-files",
-    configs: "softch3at-configs",
-    media: "softch3at-files",
-    shaders: "softch3at-shaders",
-    packages: "softch3at-packages",
+    files: "globalios-files",
+    patches: "globalios-patches",
+    images: "globalios-files",
+    configs: "globalios-configs",
+    media: "globalios-files",
+    shaders: "globalios-shaders",
+    packages: "globalios-packages",
   };
   return map[clean] || `${CLIENT_PREFIX}${clean}`;
 }
 
 function softch3atLabel(label) {
-  const clean = label || "Software Ch3at";
-  return clean.toLowerCase().includes("[softch3at]") ? clean : `[softch3at] ${clean}`;
+  const clean = label || "GLOBAL IOS";
+  return clean.toLowerCase().includes("[globalios]") ? clean : `[globalios] ${clean}`;
 }
 
 function statusLabel(status) {
@@ -1277,14 +1277,14 @@ function formatDate(value) {
 
 function isAllowedAdminEmail(email) {
   return [
-    "2008yashirchavez@gmail.com",
-    "emmajestevex@gmail.com",
-    "grego23500@gmail.com",
+    "",
+    "",
+    "",
   ].includes(email.trim().toLowerCase());
 }
 
 function fallbackTargetPath(file) {
-  return safeRelativePath(`${softch3atCategory(file.category || "softch3at-files")}/${file.slug || "content"}/${file.file_name || "content.bin"}`);
+  return safeRelativePath(`${softch3atCategory(file.category || "globalios-files")}/${file.slug || "content"}/${file.file_name || "content.bin"}`);
 }
 
 function samePath(left, right) {
