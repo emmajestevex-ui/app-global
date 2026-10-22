@@ -1,0 +1,66 @@
+GLOBAL IOS - MIGRACION OPCION A (BASE SOFTWARE CH3AT)
+==================================================
+
+DESTINO UNICO: https://github.com/emmajestevex-ui/app-global
+BASE (SOLO LECTURA): https://github.com/emmajestevex-ui/app-software
+BASE DE DATOS NUEVA: https://tqdbvswgpmtbfezwucli.supabase.co
+NOMBRE VISIBLE: GLOBAL IOS
+CLAVES: GLOBALIOS-...
+PALETA: BLANCO/NEGRO/GRIS - SIN REDES SOCIALES
+
+1) SUBIR AL REPOSITORIO NUEVO
+   a) En GitHub Desktop: File > Clone repository > URL.
+   b) Pega https://github.com/emmajestevex-ui/app-global.git y pulsa Clone.
+   c) En GitHub Desktop, Repository > Show in Explorer.
+   d) DESCOMPRIME este ZIP y COPIA SU CONTENIDO (NO el ZIP completo) a
+      la carpeta app-global que abriste con Show in Explorer.
+   e) Comprueba las rutas:
+      app-global/.github/workflows/global_ios_release.yml
+      app-global/tools/global_ios_migrate.py
+      app-global/branding/AppIcon-1024.png
+      app-global/branding/GlobalIOSLogo.png
+   f) Acepta combinar carpetas si Windows pregunta. NO lo copies a
+      app-software: ese es el original y no debe tocarse.
+   g) Regresa a GitHub Desktop > Summary: "GLOBAL IOS - instalar base".
+      Pulsa Commit to main y despues Push origin.
+
+2) GITHUB ACTIONS AUTOMATIZA LA COPIA
+   - Abre https://github.com/emmajestevex-ui/app-global/actions
+   - Busca "GLOBAL IOS - Migrar, SQL, Panel e IPA".
+   - El primer push deberia iniciarlo. Si no, pulsa Run workflow.
+   - El workflow clona app-software como BASE, copia sus archivos a
+     app-global, cambia la identidad y publica un solo panel admin.
+   - NO ejecuta cambios en Supabase automaticamente.
+   - NO modifica repositorios Glizzy ni Software Ch3at.
+   - La IPA SIN FIRMA aparecera solo si la compilacion Xcode resulta exitosa.
+
+3) ARCHIVOS A DESCARGAR DE ACTIONS (ARTIFACTS)
+   - GLOBAL-IOS-SQL-COMPLETO
+     SETUP_GLOBAL_IOS_COMPLETO.sql -> SQL Editor del Supabase NUEVO.
+     ASIGNAR_ADMIN_GLOBAL_IOS.sql -> cambia CAMBIA_AQUI_TU_EMAIL por tu
+     cuenta en Authentication > Users; ejecutalo DESPUES del primer SQL.
+   - GLOBAL-IOS-PANEL-ADMIN -> una sola pagina, con Archivos y Keys.
+   - GLOBAL-IOS-IPA-SIN-FIRMA -> solo si compila; para instalar requiere firma.
+
+4) PANEL CON START (OTRO ZIP)
+   Descarga GLOBAL_IOS_PANEL_CON_START.zip y descomprimelo.
+   PRIMERO espera que Actions haya publicado admin/ en app-global.
+   Despues abre START.bat: descarga los archivos correctos desde app-global
+   en el primer arranque y abre http://127.0.0.1:<puerto>.
+   Requiere Python 3 e Internet en la primera ejecucion.
+
+5) VERIFICACIONES Y SEGURIDAD
+   - El proyecto Supabase de GLOBAL IOS debe ser app global (tqdbvswgpmtbfezwucli).
+   - No ejecutes SQL contra las bases de Glizzy ni Software Ch3at.
+   - Nunca pongas passwords, service_role ni sb_secret_* en repositorios.
+   - La publishable key se incluye en el cliente y NO es permiso de administrador.
+   - Necesitas crear un usuario Auth para entrar en el panel y asignarle founder.
+   - La app conserva el codigo funcional base y un Bundle Identifier DISTINTO:
+     com.globalios.client. Probar en un iPhone para garantizar compatibilidad.
+   - Se elimino el acceso visible a redes sociales; no se cambian algoritmos
+     ni archivos binarios de parches o de sincronizacion.
+   - El logo solicitado reproduce un simbolo de Apple: si lo distribuiras
+     comercialmente, revisa permisos de uso de marca. No es app oficial Apple.
+
+Esta entrega fue revisada estaticamente y probada con una fuente de ejemplo.
+No se ha compilado una IPA real, probado la base nueva ni modificado tu GitHub.

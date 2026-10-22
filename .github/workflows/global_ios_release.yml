@@ -1,0 +1,148 @@
+name: 'GLOBAL IOS - Migrar, SQL, Panel e IPA'
+
+on:
+  workflow_dispatch:
+    inputs:
+      publish_admin:
+        description: 'Publicar el unico panel administrativo con GitHub Pages'
+        type: boolean
+        default: false
+        required: true
+  push:
+    branches: [main]
+    paths:
+      - 'branding/**'
+      - 'tools/global_ios_migrate.py'
+      - '.github/workflows/global_ios_release.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: global-ios-main
+  cancel-in-progress: false
+
+jobs:
+  prepare:
+    name: 'Copiar la base y preparar GLOBAL IOS'
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Obtener el nuevo repositorio app-global'
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: 'Leer solo la base publica app-software'
+        uses: actions/checkout@v4
+        with:
+          repository: emmajestevex-ui/app-software
+          ref: main
+          path: .globalios-base
+          persist-credentials: false
+      - name: 'Preparar app independiente, SQL completo y panel'
+        run: |
+          python3 tools/global_ios_migrate.py --base .globalios-base
+          rm -rf .globalios-base
+          python3 tools/global_ios_migrate.py --verify
+          git diff --check
+      - name: 'Crear paquete reproducible sin repositorio Git'
+        run: |
+          tar --exclude='./.git' --exclude='./.build' --exclude='./.globalios-base' -czf /tmp/global-ios-project.tgz .
+      - uses: actions/upload-artifact@v4
+        with:
+          name: GLOBAL-IOS-SQL-COMPLETO
+          path: |
+            supabase/SETUP_GLOBAL_IOS_COMPLETO.sql
+            supabase/ASIGNAR_ADMIN_GLOBAL_IOS.sql
+          if-no-files-found: error
+      - uses: actions/upload-artifact@v4
+        with:
+          name: GLOBAL-IOS-PANEL-ADMIN
+          path: |
+            admin/index.html
+            admin/app.js
+            admin/styles.css
+            admin/global-ios-logo.png
+          if-no-files-found: error
+      - uses: actions/upload-artifact@v4
+        with:
+          name: GLOBAL-IOS-CODIGO-FUENTE
+          path: /tmp/global-ios-project.tgz
+          if-no-files-found: error
+      - name: 'Publicar los archivos de GLOBAL IOS en app-global'
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          if ! git diff --cached --quiet; then
+            git commit -m 'Import GLOBAL IOS independent app, admin and Supabase SQL'
+            git push origin HEAD:main
+          fi
+
+  ios_ipa:
+    name: 'Compilar IPA sin firmar (requiere macOS)'
+    needs: prepare
+    runs-on: macos-15
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: GLOBAL-IOS-CODIGO-FUENTE
+          path: ${{ runner.temp }}/global-ios-download
+      - name: 'Restaurar codigo'
+        run: |
+          mkdir -p project
+          tar -xzf '${{ runner.temp }}/global-ios-download/global-ios-project.tgz' -C project
+      - name: 'Compilar iOS'
+        working-directory: project
+        run: |
+          set -o pipefail
+          xcodebuild -list -project ThreeOneOSFive.xcodeproj
+          xcodebuild -project ThreeOneOSFive.xcodeproj \
+            -scheme 3105 \
+            -configuration Release \
+            -sdk iphoneos \
+            -derivedDataPath .build \
+            CODE_SIGNING_ALLOWED=NO \
+            build | tee '${{ runner.temp }}/global-ios-build.log'
+      - name: 'Empaquetar IPA no firmada'
+        working-directory: project
+        run: |
+          APP=$(find .build/Build/Products/Release-iphoneos -maxdepth 1 -name '*.app' -type d | head -n 1)
+          test -n "$APP" || (echo 'No se encontro .app compilada' && exit 1)
+          mkdir -p Payload
+          ditto "$APP" "Payload/$(basename "$APP")"
+          zip -qr ../GLOBAL_IOS_unsigned.ipa Payload
+      - uses: actions/upload-artifact@v4
+        with:
+          name: GLOBAL-IOS-IPA-SIN-FIRMA
+          path: GLOBAL_IOS_unsigned.ipa
+          if-no-files-found: error
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: GLOBAL-IOS-LOG-COMPILACION
+          path: ${{ runner.temp }}/global-ios-build.log
+          if-no-files-found: ignore
+
+  publish_admin:
+    name: 'Publicar UN panel admin (opcional)'
+    if: github.event_name == 'workflow_dispatch' && inputs.publish_admin == true
+    needs: prepare
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: GLOBAL-IOS-PANEL-ADMIN
+          path: public
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: public
+      - id: deploy
+        uses: actions/deploy-pages@v4
