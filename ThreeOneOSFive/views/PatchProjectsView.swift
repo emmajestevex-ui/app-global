@@ -35,7 +35,7 @@ struct PatchProjectsView: View {
             VStack(spacing: 0) {
                 AppSearchField(
                     text: $searchText,
-                    prompt: "Buscar archivos Glizzy Net",
+                    prompt: "Buscar archivos Software Ch3at",
                     clearLabel: language.text("common.clear")
                 )
                 ScrollView {
@@ -66,7 +66,7 @@ struct PatchProjectsView: View {
                 }
             }
             .background(AppTheme.pageBackground.ignoresSafeArea())
-            .navigationTitle("Archivos Glizzy Net")
+            .navigationTitle("Archivos Software Ch3at")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 if store.isBusy {
@@ -169,7 +169,7 @@ private struct PatchListHeader: View {
         HStack(spacing: 14) {
             AppLogo(size: 46)
             VStack(alignment: .leading, spacing: 4) {
-                Text("Centro Glizzy Net")
+                Text("Centro Software Ch3at")
                     .font(.title3.weight(.black))
                 Text("Aimbots y archivos privados")
                     .font(.caption)
@@ -415,14 +415,14 @@ private struct PatchProjectDetailView: View {
                 VStack(spacing: 18) {
                     PatchDetailHero(project: project, style: detailStyle, isApplied: receipt != nil)
 
-                    Link(destination: URL(string: "https://www.tiktok.com/@glizzynetx?_r=1&_t=ZS-99vZ2aOwzau")!) {
+                    Link(destination: URL(string: "https://www.tiktok.com/@soyenyercitord?_r=1&_t=ZS-9AkGglyDhcy")!) {
                         HStack(spacing: 12) {
                             AppRowIcon(systemName: "play.rectangle.fill", tint: AppTheme.accentGlow, symbolSize: 18, frameSize: 42)
                             VStack(alignment: .leading, spacing: 2) {
                                 Text("TikTok oficial")
                                     .font(.headline)
                                     .foregroundStyle(.primary)
-                                Text("@glizzynetx")
+                                Text("@soyenyercitord")
                                     .font(.caption.weight(.medium))
                                     .foregroundStyle(.secondary)
                             }

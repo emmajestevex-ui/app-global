@@ -248,7 +248,7 @@ final class RemoteContentStore: ObservableObject {
     @Published private(set) var installedFiles: [RemoteContentFile] = []
     @Published private(set) var remoteVersion = 0
     @Published private(set) var statusText = "Listo"
-    @Published private(set) var detailText = "Los archivos remotos se guardan dentro de Glizzy Net."
+    @Published private(set) var detailText = "Los archivos remotos se guardan dentro de Software Ch3at."
     @Published private(set) var progress: Double?
     @Published private(set) var lastChecked: Date?
     @Published private(set) var isBusy = false
@@ -368,7 +368,7 @@ final class RemoteContentStore: ObservableObject {
     }
 
     private func fetchManifest() async throws -> RemoteContentManifest {
-        let licenseKey = UserDefaults.standard.string(forKey: "gllyzi.license.key")?.normalizedLicenseKey ?? ""
+        let licenseKey = UserDefaults.standard.string(forKey: "softch3at.license.key")?.normalizedLicenseKey ?? ""
         guard !licenseKey.isEmpty else { throw RemoteContentSyncError.missingLicense }
 
         var components = URLComponents(url: SupabaseLicenseConfig.projectURL, resolvingAgainstBaseURL: false)
@@ -379,7 +379,6 @@ final class RemoteContentStore: ObservableObject {
         request.httpMethod = "POST"
         request.timeoutInterval = 25
         request.setValue(SupabaseLicenseConfig.publishableKey, forHTTPHeaderField: "apikey")
-        request.setValue("Bearer \(SupabaseLicenseConfig.publishableKey)", forHTTPHeaderField: "Authorization")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.setValue("application/json", forHTTPHeaderField: "Accept")
         request.httpBody = try JSONSerialization.data(withJSONObject: [
@@ -466,7 +465,6 @@ final class RemoteContentStore: ObservableObject {
         var request = URLRequest(url: sourceURL)
         request.timeoutInterval = 60
         request.setValue(SupabaseLicenseConfig.publishableKey, forHTTPHeaderField: "apikey")
-        request.setValue("Bearer \(SupabaseLicenseConfig.publishableKey)", forHTTPHeaderField: "Authorization")
         request.setValue("application/octet-stream", forHTTPHeaderField: "Accept")
 
         let (temporaryURL, response) = try await session.download(for: request)
@@ -594,7 +592,7 @@ final class RemoteContentStore: ObservableObject {
             .map { String($0).addingPercentEncoding(withAllowedCharacters: allowed) ?? String($0) }
             .joined(separator: "/")
         let base = SupabaseLicenseConfig.projectURL.absoluteString.trimmingCharacters(in: CharacterSet(charactersIn: "/"))
-        guard let url = URL(string: "\(base)/storage/v1/object/gllyzi-content/\(encodedPath)") else {
+        guard let url = URL(string: "\(base)/storage/v1/object/softch3at-content/\(encodedPath)") else {
             throw RemoteContentSyncError.badURL
         }
         return url
@@ -625,7 +623,7 @@ final class RemoteContentStore: ObservableObject {
     private var storeRootURL: URL {
         let base = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first
             ?? URL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
-        return base.appendingPathComponent("GLLYZINetRemoteContent", isDirectory: true)
+        return base.appendingPathComponent("SOFTCH3ATNetRemoteContent", isDirectory: true)
     }
 
     private var currentRootURL: URL {
@@ -654,8 +652,8 @@ final class RemoteContentStore: ObservableObject {
             version: manifest.version,
             publishedAt: manifest.publishedAt,
             files: manifest.files.filter { file in
-                file.category.lowercased().hasPrefix("gllyzi-")
-                    || file.slug.lowercased().hasPrefix("gllyzi-")
+                file.category.lowercased().hasPrefix("softch3at-")
+                    || file.slug.lowercased().hasPrefix("softch3at-")
             }
         )
     }
@@ -759,7 +757,7 @@ enum RemoteContentLibrary {
     private static func storeRootURL(fileManager: FileManager) -> URL {
         let base = fileManager.urls(for: .applicationSupportDirectory, in: .userDomainMask).first
             ?? URL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
-        return base.appendingPathComponent("GLLYZINetRemoteContent", isDirectory: true)
+        return base.appendingPathComponent("SOFTCH3ATNetRemoteContent", isDirectory: true)
     }
 
     private static func currentRootURL(fileManager: FileManager) -> URL {

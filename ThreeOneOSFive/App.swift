@@ -10,7 +10,7 @@ struct ThreeOneOSFiveApp: App {
     @StateObject private var fileOperationCoordinator = FileOperationCoordinator()
     @StateObject private var remoteContentStore = RemoteContentStore()
     @State private var showOnboarding = false
-    @AppStorage("gllyzi.license.supabaseUnlocked") private var licenseUnlocked = false
+    @AppStorage("softch3at.license.supabaseUnlocked") private var licenseUnlocked = false
     @State private var licenseMessage = ""
     @State private var licenseCheckInFlight = false
     @State private var licenseValidationPending = true
@@ -21,7 +21,7 @@ struct ThreeOneOSFiveApp: App {
 
     init() {
         setupLogCapture()
-        log("app: Glizzy Net launching - iOS \(AppInfo.osVersion) (\(AppInfo.osBuild)) \(AppInfo.machineName)")
+        log("app: Software Ch3at launching - iOS \(AppInfo.osVersion) (\(AppInfo.osBuild)) \(AppInfo.machineName)")
     }
 
     private var language: AppLanguage {
@@ -37,7 +37,7 @@ struct ThreeOneOSFiveApp: App {
 
     private func refreshLicenseStatus() {
         let deviceID = DeviceInstallationID.current()
-        let storedKey = UserDefaults.standard.string(forKey: "gllyzi.license.key")?.normalizedLicenseKey ?? ""
+        let storedKey = UserDefaults.standard.string(forKey: "softch3at.license.key")?.normalizedLicenseKey ?? ""
         guard !storedKey.isEmpty else {
             licenseValidationPending = false
             if licenseUnlocked {
@@ -57,9 +57,9 @@ struct ThreeOneOSFiveApp: App {
                     licenseValidationPending = false
                     if response.success {
                         let defaults = UserDefaults.standard
-                        defaults.set(storedKey, forKey: "gllyzi.license.key")
-                        defaults.set(deviceID, forKey: "gllyzi.license.device")
-                        defaults.set(true, forKey: "gllyzi.license.supabaseUnlocked")
+                        defaults.set(storedKey, forKey: "softch3at.license.key")
+                        defaults.set(deviceID, forKey: "softch3at.license.device")
+                        defaults.set(true, forKey: "softch3at.license.supabaseUnlocked")
                         licenseMessage = ""
                         licenseUnlocked = true
                         LicenseEntitlements.store(response.capabilities, expiresAt: response.expiresAt)
@@ -85,7 +85,7 @@ struct ThreeOneOSFiveApp: App {
 
     private func lockStoredLicense(message: String) {
         let defaults = UserDefaults.standard
-        defaults.set(false, forKey: "gllyzi.license.supabaseUnlocked")
+        defaults.set(false, forKey: "softch3at.license.supabaseUnlocked")
         LicenseEntitlements.clear()
         licenseMessage = message
         licenseValidationPending = false
@@ -307,7 +307,7 @@ private struct GreegLicenseView: View {
     let onSuccess: () -> Void
 
     init(initialMessage: String = "", onSuccess: @escaping () -> Void) {
-        _key = State(initialValue: UserDefaults.standard.string(forKey: "gllyzi.license.key")?.normalizedLicenseKey ?? "")
+        _key = State(initialValue: UserDefaults.standard.string(forKey: "softch3at.license.key")?.normalizedLicenseKey ?? "")
         _messageText = State(initialValue: initialMessage)
         self.onSuccess = onSuccess
     }
@@ -330,7 +330,7 @@ private struct GreegLicenseView: View {
                     .shadow(color: Color.black.opacity(0.12), radius: 24)
 
                 VStack(spacing: 7) {
-                    Text("Glizzy Net")
+                    Text("Software Ch3at")
                         .font(.system(size: 31, weight: .black, design: .rounded))
                         .foregroundStyle(.black)
                     Text("Acceso privado")
@@ -386,7 +386,7 @@ private struct GreegLicenseView: View {
                     .foregroundStyle(.secondary)
 
                 Spacer()
-                Text("Glizzy Net - CONTROL PRIVADO")
+                Text("Software Ch3at - CONTROL PRIVADO")
                     .font(.caption2.weight(.semibold))
                     .tracking(2)
                     .foregroundStyle(.secondary)
@@ -425,9 +425,9 @@ private struct GreegLicenseView: View {
 
             if response.success {
                 let defaults = UserDefaults.standard
-                defaults.set(normalized, forKey: "gllyzi.license.key")
-                defaults.set(deviceID, forKey: "gllyzi.license.device")
-                defaults.set(true, forKey: "gllyzi.license.supabaseUnlocked")
+                defaults.set(normalized, forKey: "softch3at.license.key")
+                defaults.set(deviceID, forKey: "softch3at.license.device")
+                defaults.set(true, forKey: "softch3at.license.supabaseUnlocked")
                 LicenseEntitlements.store(response.capabilities, expiresAt: response.expiresAt)
                 didActivate = true
                 onSuccess()
@@ -439,15 +439,15 @@ private struct GreegLicenseView: View {
 }
 
 enum SupabaseLicenseConfig {
-    static let projectURL = URL(string: "https://zffwtixmbuctinffojwe.supabase.co")!
-    static let publishableKey = "sb_publishable_6xRmOLD0Cw4Dtwn460l_Zw_Y7khT6wA"
+    static let projectURL = URL(string: "https://jtifsqolnkxrououonjs.supabase.co")!
+    static let publishableKey = "sb_publishable_vVlLdGyUErtzRfSyPU426g_WqVACybG"
 }
 
 enum LicenseEntitlements {
     static let specialAssetIndexer = "special_assetindexer"
 
-    private static let capabilitiesKey = "gllyzi.license.capabilities"
-    private static let expiresAtKey = "gllyzi.license.expiresAt"
+    private static let capabilitiesKey = "softch3at.license.capabilities"
+    private static let expiresAtKey = "softch3at.license.expiresAt"
 
     static func store(_ capabilities: [String], expiresAt: String?, defaults: UserDefaults = .standard) {
         let normalized = capabilities
@@ -593,7 +593,6 @@ private final class SupabaseLicenseClient {
         request.httpMethod = "POST"
         request.timeoutInterval = 25
         request.setValue(SupabaseLicenseConfig.publishableKey, forHTTPHeaderField: "apikey")
-        request.setValue("Bearer \(SupabaseLicenseConfig.publishableKey)", forHTTPHeaderField: "Authorization")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.setValue("application/json", forHTTPHeaderField: "Accept")
         request.httpBody = try JSONSerialization.data(withJSONObject: [
@@ -628,9 +627,9 @@ private final class SupabaseLicenseClient {
 }
 
 enum DeviceInstallationID {
-    private static let service = "com.apple.mobile.MobileHouseArrest.gllyzi-license"
+    private static let service = "com.apple.mobile.MobileHouseArrest.softch3at-license"
     private static let account = "installation-id"
-    private static let fallbackKey = "gllyzi.license.installationID"
+    private static let fallbackKey = "softch3at.license.installationID"
 
     static func current(defaults: UserDefaults = .standard) -> String {
         if let existing = readFromKeychain(), !existing.isEmpty {

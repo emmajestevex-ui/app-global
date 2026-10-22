@@ -122,7 +122,7 @@ struct DisplayAttributionSheet: View {
                     HStack(spacing: 14) {
                         AppLogo(size: 44)
                         VStack(alignment: .leading, spacing: 3) {
-                            Text("GLLYZI APP")
+                            Text("SOFTWARE CH3AT")
                                 .font(.headline)
                             Text(language.text("attribution.subtitle"))
                                 .font(.subheadline)

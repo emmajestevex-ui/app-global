@@ -610,3 +610,22 @@ textarea:focus {
     flex: 1 1 130px;
   }
 }
+
+/* --- Software Ch3at purple identity (UI-only overrides) --- */
+:root {
+  --bg:#06020d; --panel:#100a1c; --panel-strong:#20112f;
+  --line:#36244b; --line-hot:#713cb0; --text:#fcf9ff;
+  --muted:#b2a3c5; --accent:#a13ceb; --accent-strong:#ce8dff;
+  --blue:#bc70ff;
+}
+body {
+ background: radial-gradient(circle at 18% -10%, rgba(149,62,222,.23), transparent 42%),
+             radial-gradient(circle at 88% 18%,rgba(100,30,159,.17),transparent 32%),
+             linear-gradient(165deg,#0d0618,var(--bg));
+}
+.panel { border-radius:18px; background:linear-gradient(150deg,#21132f,#0f0a17); }
+.tabButton.active,.primary {background:linear-gradient(135deg,#7c26cf,#b65af4);}
+.topbar {border-bottom:1px solid rgba(180,122,240,.19);margin-bottom:20px;}
+.brandLockup img {object-fit:contain;background:#08050d;}
+button:focus-visible, input:focus-visible {outline:2px solid #ce8dff;outline-offset:3px;}
+@media(max-width:700px){.topbar{flex-wrap:wrap} .shell{width:min(100% - 24px,1180px)}}

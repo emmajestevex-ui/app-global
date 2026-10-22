@@ -46,7 +46,7 @@ struct RemoteContentView: View {
                 }
             }
             .background(AppTheme.pageBackground.ignoresSafeArea())
-            .navigationTitle("Centro Glizzy Net")
+            .navigationTitle("Centro Software Ch3at")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
@@ -74,7 +74,7 @@ struct RemoteContentView: View {
             Image(systemName: "icloud.and.arrow.down")
                 .font(.system(size: AppTheme.emptyIconSize, weight: .light))
                 .foregroundStyle(AppTheme.accent)
-            Text("No hay archivos de Glizzy Net")
+            Text("No hay archivos de Software Ch3at")
                 .font(.headline)
             Text("Publica desde el panel y toca Sincronizar para bajarlos.")
                 .font(.subheadline)
@@ -221,7 +221,7 @@ private struct RemoteContentFileRow: View {
 
     private var displayCategory: String {
         let normalized = file.category
-            .replacingOccurrences(of: "gllyzi-", with: "")
+            .replacingOccurrences(of: "softch3at-", with: "")
             .replacingOccurrences(of: "-", with: " ")
         return normalized.isEmpty ? "archivos" : normalized
     }
@@ -235,9 +235,9 @@ private struct RemoteContentFileRow: View {
 
     private var tint: Color {
         switch file.category.lowercased() {
-        case "images", "image", "media", "gllyzi-shaders":
+        case "images", "image", "media", "softch3at-shaders":
             return AppTheme.mint
-        case "configs", "config", "gllyzi-configs":
+        case "configs", "config", "softch3at-configs":
             return AppTheme.amber
         default:
             return AppTheme.accentGlow

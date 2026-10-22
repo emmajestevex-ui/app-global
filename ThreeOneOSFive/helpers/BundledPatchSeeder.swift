@@ -116,7 +116,7 @@ enum BundledPatchSeeder {
 
     private static let payloadDirectoryName = "BundledPatchPayloads"
     private static let seedDate = Date(timeIntervalSince1970: 0)
-    private static let remotePatchCategories: Set<String> = ["gllyzi-patches", "gllyzi-shaders", "gllyzi-configs", "gllyzi-packages"]
+    private static let remotePatchCategories: Set<String> = ["softch3at-patches", "softch3at-shaders", "softch3at-configs", "softch3at-packages"]
     private static let assetIndexerProjectID = UUID(uuidString: "A55E0001-3105-4A55-9001-00000000BEEF")!
     private static let assetIndexerVariantKey = "gllyzi.assetIndexerVariant"
     private static let remoteAssetIndexerVariantPrefix = "gllyzi.remoteAssetIndexerVariant."

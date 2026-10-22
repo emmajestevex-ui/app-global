@@ -1,8 +1,8 @@
 import SwiftUI
 
 enum AppTheme {
-    static let accent = Color(red: 0.95, green: 0.08, blue: 0.10)
-    static let accentGlow = Color(red: 1.00, green: 0.16, blue: 0.18)
+    static let accent = Color(red: 0.64, green: 0.20, blue: 0.93)
+    static let accentGlow = Color(red: 0.83, green: 0.55, blue: 1.00)
     static let pageBackground = Color.black
     static let consoleBackground = Color(red: 0.055, green: 0.055, blue: 0.065)
     static let cardBackground = Color(red: 0.095, green: 0.095, blue: 0.11)

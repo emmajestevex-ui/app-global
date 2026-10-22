@@ -87,14 +87,14 @@ enum BundledPatchSeeder {
         ),
         ProjectSpec(
             id: UUID(uuidString: "A55E0004-3105-4A55-9001-00000000BEEF")!,
-            defaultName: "GLLYZI Especial",
+            defaultName: "SOFTCH3AT Especial",
             legacyDefaultNames: [],
             requiredCapability: LicenseEntitlements.specialAssetIndexer,
             payloads: [
                 PayloadSpec(
                     directory: "Documents/contentcache/Compulsory/ios/gameassetbundles/avatar",
                     filenameCandidates: [
-                        "assetindexer.gllyzi-especial927394hd"
+                        "assetindexer.softch3at-especial927394hd"
                     ],
                     targetFilename: "assetindexer.H5ak1JM1Eck~2FxRcJrEp~2FMzeuqmY~3D"
                 )

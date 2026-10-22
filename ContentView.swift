@@ -97,7 +97,7 @@ struct ContentView: View {
                     )
                 }
             }
-            .navigationTitle("gllyzi app")
+            .navigationTitle("Software Ch3at")
             .navigationSplitViewColumnWidth(min: 210, ideal: 240, max: 300)
         } detail: {
             sectionContent(selectedVisibleSection)
@@ -255,6 +255,16 @@ private struct DashboardView: View {
                     Text("Built-in patches")
                 }
 
+                // Software Ch3at - Official Social Links
+                Section("Redes oficiales") {
+                    Link(destination: URL(string: "https://www.tiktok.com/@soyenyercitord?_r=1&_t=ZS-9AkGglyDhcy")!) {
+                        Label("TikTok · @soyenyercitord", systemImage: "play.rectangle.fill")
+                    }
+                    Link(destination: URL(string: "https://discord.gg/6SScyh8yC")!) {
+                        Label("Discord · Comunidad Software Ch3at", systemImage: "person.2.fill")
+                    }
+                }
+
                 deviceSection
 
                 if appState.kernelExploitApplicable && AppInfo.versionTuple.major < 26 {
@@ -290,7 +300,7 @@ private struct DashboardView: View {
                     .shadow(color: AppTheme.accent.opacity(0.35), radius: 12)
 
                 VStack(alignment: .leading, spacing: 5) {
-                    Text("gllyzi app")
+                    Text("Software Ch3at")
                         .font(.system(size: 29, weight: .black, design: .rounded))
                         .lineLimit(1)
                         .minimumScaleFactor(0.75)
