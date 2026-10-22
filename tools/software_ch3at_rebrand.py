@@ -51,6 +51,8 @@ def replace_base(text: str) -> str:
     text = text.replace("Glizzy Net", BRAND).replace("GLIZZY NET", BRAND.upper())
     text = text.replace("gllyzi app", BRAND).replace("GLLYZI APP", BRAND.upper())
     text = text.replace("GLLYZI-", PREFIX + "-")
+    # Corregir tambien el ejemplo antiguo GLIZZY que se ve en el login iOS.
+    text = text.replace("GLIZZY-", PREFIX + "-")
     text = text.replace("[gllyzi]", "[softch3at]")
     text = text.replace("gllyzi-content", "softch3at-content")
     text = text.replace("gllyzi-", "softch3at-")
@@ -287,6 +289,12 @@ def verify() -> None:
         raise AssertionError('Un cliente conserva la publishable key de Glizzy')
     if len(read(ROOT / 'supabase/setup_softch3at.sql')) < 25000:
         raise AssertionError('SQL incompleto; cancelando entrega')
+    # Es la ruta App.swift que Xcode realmente compila, no la copia de la raiz.
+    compiled_app = read(ROOT / 'ThreeOneOSFive/App.swift')
+    if 'GLIZZY-ABCD-EF12-3456' in compiled_app:
+        raise AssertionError('El login de la app sigue mostrando GLIZZY')
+    if 'SOFTCH3AT-ABCD-EF12-3456' not in compiled_app:
+        raise AssertionError('Falta el nuevo ejemplo de key en el login de Software Ch3at')
     ET.fromstring(read(ROOT / 'ThreeOneOSFive/Info.plist'))
     assert (ROOT / 'ThreeOneOSFive/Assets.xcassets/AppIcon.appiconset/AppIcon-1024.png').is_file()
     assert (ROOT / 'admin/gllyzi-logo.png').is_file()
