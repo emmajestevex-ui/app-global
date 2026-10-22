@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>Glizzy Net</string>
+	<string>Software Ch3at</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -13,7 +13,7 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>Glizzy Net</string>
+	<string>Software Ch3at</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
@@ -27,9 +27,9 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Glizzy Net no necesita acceso a fotos para el flujo de archivos.</string>
+	<string>Software Ch3at no necesita acceso a fotos para el flujo de archivos.</string>
 	<key>NSDocumentsFolderUsageDescription</key>
-	<string>Glizzy Net usa documentos solo para archivos locales de soporte.</string>
+	<string>Software Ch3at usa documentos solo para archivos locales de soporte.</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
