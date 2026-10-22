@@ -342,7 +342,7 @@ private struct GreegLicenseView: View {
                     HStack(spacing: 10) {
                         Image(systemName: "key.fill")
                             .foregroundStyle(.black)
-                        TextField("GLIZZY-ABCD-EF12-3456", text: $key)
+                        TextField("SOFTCH3AT-ABCD-EF12-3456", text: $key)
                             .textInputAutocapitalization(.characters)
                             .autocorrectionDisabled()
                             .foregroundStyle(.black)
